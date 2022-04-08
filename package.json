@@ -1,0 +1,55 @@
+{
+  "name": "traceability-interop",
+  "version": "0.0.1",
+  "description": "An enterprise grade HTTP API for leveraging [W3C Decentralized Identifiers](https://www.w3.org/TR/did-core/) and [W3C Verifiable Credentials](https://www.w3.org/TR/vc-data-model/) with [W3C CCG Traceability Vocabulary](https://w3c-ccg.github.io/traceability-vocab/) and the [VC API](https://w3c-ccg.github.io/vc-api/) when possible.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "shove": "git add -A; git commit -m 'chore: :rocket: testing ci'; git push origin main",
+    "clean": "npm run report:clean",
+    "report:generate": "newman run",
+    "postreport:generate": "npm run report:prepare",
+    "report:prepare": "node ./docs/tutorials/report-generation/build-index.js",
+    "report:clean": "rm -rf ./docs/reports/*",
+    "postinstall": "lerna bootstrap",
+    "clean:lock": "npx lerna exec 'rm -rf package-lock.json node_modules'",
+    "install:clean": "npx lerna clean -y && rm -rf node_modules && npm i",
+    "install:ci": "npm ci --ignore-scripts && lerna link && lerna bootstrap",
+    "lint": "lerna run lint --stream",
+    "lint:docs": "eslint --ext .html docs --fix",
+    "format": "lerna run format --stream",
+    "format:docs": "prettier --write docs/**/*.html",
+    "validate-spec": "npx swagger-cli validate docs/openapi/openapi.yml",
+    "preserve": "npx swagger-cli bundle docs/openapi/openapi.yml -o docs/openapi/openapi.json --dereference",
+    "serve": "npx serve ./docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/w3c-ccg/traceability-interop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/w3c-ccg/traceability-interop/issues"
+  },
+  "homepage": "https://github.com/w3c-ccg/traceability-interop#readme",
+  "devDependencies": {
+    "@html-eslint/eslint-plugin": "^0.13.0",
+    "@html-eslint/parser": "^0.13.0",
+    "eslint": "^8.4.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.1",
+    "eslint-plugin-jest": "^25.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.5.1"
+  },
+  "dependencies": {
+    "lerna": "^4.0.0",
+    "newman": "^5.3.2",
+    "newman-reporter-html": "^1.0.5",
+    "@apidevtools/swagger-cli": "^4.0.4"
+  }
+}

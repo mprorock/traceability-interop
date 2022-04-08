@@ -1,0 +1,15 @@
+title: Verification Result
+type: object
+properties:
+  checks:
+    type: array
+    items:
+      type: string
+  warnings:
+    type: array
+    items:
+      type: string
+  errors:
+    type: array
+    items:
+      type: string
